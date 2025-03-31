@@ -1,10 +1,16 @@
 import React from "react";
+import { Box, Typography } from "@mui/material";
+import ThemeToggle from "./components/ThemeToggle";
+import StyledButton from "./components/StyledButton";
 
 const Home = () => {
   return (
     <>
-      <h1>Habesha Clothes</h1>
-      <h2>Ethiopia traditional cloth</h2>
+      <Box sx={{ textAlign: "center", mt: 4 }}>
+        <Typography variant="h4">Habesha Clothes</Typography>
+        <ThemeToggle />
+        <StyledButton>Click Me</StyledButton>
+      </Box>
     </>
   );
 };
