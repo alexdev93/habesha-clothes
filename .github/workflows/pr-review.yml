@@ -1,0 +1,21 @@
+name: PR Approval Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  require-approval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PR is approved
+        run: |
+          APPROVALS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews" \
+            | jq '[.[] | select(.state=="APPROVED")] | length')
+
+          if [ "$APPROVALS" -lt 1 ]; then
+            echo "🚨 At least one approval is required before merging!"
+            exit 1
+          fi
