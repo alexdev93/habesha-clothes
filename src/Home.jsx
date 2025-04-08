@@ -12,18 +12,17 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 import ProductCard from "./components/ProductCard";
+import ThemeToggle from "./components/ThemeToggle";
+import { useTheme } from "@mui/material/styles";
 
-const HeroSection = styled(Box)`
-  background: url("/images/hero-banner.jpg") no-repeat center center/cover;
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
-  padding: 2rem;
-`;
+// Dummy data
+const dummyProducts = [
+  { id: 1, name: "T-shirt", price: "29.99", image: "/images/tshirt.jpg" },
+  { id: 2, name: "Jeans", price: "49.99", image: "/images/jeans.jpg" },
+  { id: 3, name: "Jacket", price: "89.99", image: "/images/jacket.jpg" },
+];
 
+// Styled Components
 const CategoryCard = styled(Card)`
   cursor: pointer;
   text-align: center;
@@ -57,22 +56,48 @@ const Footer = styled(Box)`
   margin-top: 3rem;
 `;
 
-const dummyProducts = [
-  { id: 1, name: "T-shirt", price: "29.99", image: "/images/tshirt.jpg" },
-  { id: 2, name: "Jeans", price: "49.99", image: "/images/jeans.jpg" },
-  { id: 3, name: "Jacket", price: "89.99", image: "/images/jacket.jpg" },
-];
+// HeroSection with theme support
+const HeroSection = ({ children }) => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
 
+  return (
+    <Box
+      sx={{
+        height: "80vh",
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        background: isDark
+          ? "linear-gradient(to right, #1c1c1c, #2c2c2c)"
+          : "url('/images/hero-banner.jpg') no-repeat center center / cover",
+        color: isDark ? "#fff" : "#000",
+        padding: 4,
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
+
+// Main Home Component
 export default function Home() {
   return (
     <>
-      {/* Hero */}
+      {/* Hero Section */}
       <HeroSection>
+        {/* Theme Toggler Position */}
+        <Box sx={{ position: "absolute", top: 20, right: 20 }}>
+          <ThemeToggle />
+        </Box>
+
         <Box>
-          <Typography variant="h2" gutterBottom>
+          <Typography variant="h2" gutterBottom color="inherit">
             Style Redefined
           </Typography>
-          <Typography variant="h6" mb={3}>
+          <Typography variant="h6" mb={3} color="inherit">
             Discover the latest trends in fashion
           </Typography>
           <Button variant="contained" size="large">
@@ -81,6 +106,7 @@ export default function Home() {
         </Box>
       </HeroSection>
 
+      {/* Content */}
       <Container maxWidth="lg">
         {/* Categories */}
         <Box my={5}>
