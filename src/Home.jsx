@@ -5,21 +5,23 @@ import ProductSection from "./components/ProductSection";
 import PromoBanner from "./components/PromoBanner";
 import NewsletterSection from "./components/NewsletterSection";
 import Footer from "./components/Footer";
+import { Navbar } from "./components/Navbar";
 
 // Dummy products
-const dummyProducts = [
-  { id: 1, name: "T-shirt", price: "29.99", image: "/images/tshirt.jpg" },
-  { id: 2, name: "Jeans", price: "49.99", image: "/images/jeans.jpg" },
-  { id: 3, name: "Jacket", price: "89.99", image: "/images/jacket.jpg" },
-];
+// const dummyProducts = [
+//   { id: 1, name: "T-shirt", price: "29.99", image: "/images/tshirt.jpg" },
+//   { id: 2, name: "Jeans", price: "49.99", image: "/images/jeans.jpg" },
+//   { id: 3, name: "Jacket", price: "89.99", image: "/images/jacket.jpg" },
+// ];
 
 // Dummy categories
-const categories = ["Men", "Women", "Accessories"];
+// const categories = ["Men", "Women", "Accessories"];
 
 export default function Home() {
   return (
     <>
-      <HeroSection
+      <Navbar />
+      {/* <HeroSection
         title="Style Redefined"
         subtitle="Discover the latest trends in fashion"
         buttonText="Shop Now"
@@ -33,7 +35,7 @@ export default function Home() {
         buttonText="Shop Now"
       />
       <NewsletterSection />
-      <Footer />
+      <Footer /> */}
     </>
   );
 }
