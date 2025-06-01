@@ -33,9 +33,9 @@ export function Navbar() {
     { label: "Couples", path: "/Buddy" },
     { label: "Men's", path: "/Tribes" },
     { label: "Contact Us", path: "/signup" },
-    { label: "About Us", path: "/signup" },
-    { label: "FAQ", path: "/signup" },
-    { label: "Community", path: "/signup" },
+    { label: "About Us", path: "/about" },
+    { label: "FAQ", path: "/faq" },
+    { label: "Community", path: "/Community" },
   ];
   const toggleDrawer = () => setOpen((prev) => !prev);
   const closeDrawer = () => setOpen(false);
@@ -108,17 +108,22 @@ export function Navbar() {
         onClose={closeDrawer}
         PaperProps={{
           sx: {
-            width: { xs: "100vw", md: 250 },
-            top: { xs: "6.75rem", md: 0 },
-            height: { xs: "calc(100vh - 6.75rem)", md: "auto" },
+            width: "100vw",
+            top: "6.75rem", // Start below the AppBar
+            height: "calc(100vh - 6.75rem)", // Fill the rest of the screen
             left: 0,
-            position: "fixed",
+            position: "relative",
             backgroundColor: "#D9D9D9",
             boxSizing: "border-box",
           },
         }}
         ModalProps={{
           keepMounted: true,
+          BackdropProps: {
+            sx: {
+              backgroundColor: "transparent", // <--- This removes the dark overlay
+            },
+          },
         }}
       >
         <Box sx={drawerBoxStyle}>{drawerList}</Box>
