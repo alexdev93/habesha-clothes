@@ -13,6 +13,7 @@ export const toolbarStyle = {
   marginTop: "-0.5rem",
   width: "100%",
   position: "relative",
+  backgroundColor: "#D9D9D9",
 };
 
 export const titleStyle = {
@@ -29,7 +30,7 @@ export const titleStyle = {
 };
 
 export const navBoxStyle = {
-  flexGrow: 0, // Don't take all available space
+  flexGrow: 0.1, // Don't take all available space
   justifyContent: { xs: "center", md: "flex-end" }, // Right align on desktop
   display: { xs: "none", md: "flex" },
   order: 2,
@@ -66,8 +67,11 @@ export const getButtonStyle = (isActive) => ({
   color: "black",
   fontWeight: "normal",
   fontSize: { xs: "1rem", md: "0.85rem" }, // Smaller font on desktop
+  minWidth: { xs: "auto", md: 60 }, // Reduce min width on desktop
+  paddingLeft: { xs: 1, md: 1 }, // Less horizontal padding
+  paddingRight: { xs: 1, md: 1 },
   borderBottom: isActive ? "2px solid black" : "none",
-  margin: { xs: "0 8px", md: "0 10px" }, // Less space between items on desktop
+  margin: { xs: "0 8px", md: "0 4px" }, // Less space between items on desktop
   "&:hover": { backgroundColor: "#D9D9D9" },
   "@media (max-width:899px)": {
     color: "white",
