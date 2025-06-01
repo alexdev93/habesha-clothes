@@ -66,7 +66,7 @@ export const drawerBoxStyle = {
 export const getButtonStyle = (isActive) => ({
   color: "black",
   fontWeight: "normal",
-  fontSize: { xs: "1rem", md: "0.85rem" }, // Smaller font on desktop
+  fontSize: { xs: "1rem", md: "0.65rem" }, // Smaller font on desktop
   minWidth: { xs: "auto", md: 60 }, // Reduce min width on desktop
   paddingLeft: { xs: 1, md: 1 }, // Less horizontal padding
   paddingRight: { xs: 1, md: 1 },
