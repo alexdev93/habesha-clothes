@@ -59,7 +59,7 @@ export function Navbar() {
 
   return (
     <>
-      <AppBar position="static" sx={appBarStyle}>
+      <AppBar position="fixed" sx={appBarStyle}>
         <Toolbar sx={toolbarStyle}>
           {/* Drawer toggler */}
           <IconButton

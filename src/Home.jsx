@@ -19,14 +19,29 @@ import { Navbar } from "./components/Navbar";
 
 export default function Home() {
   return (
-    <>
+    <div
+      style={{
+        overflowX: "hidden",
+      }}
+    >
       <Navbar />
-      {/* <HeroSection
-        title="Style Redefined"
-        subtitle="Discover the latest trends in fashion"
-        buttonText="Shop Now"
-        image="/images/hero-banner.jpg"
-      />
+      <div style={{ height: "6.75rem" }} /> {/* Spacer for fixed navbar */}
+      <div
+        style={{
+          position: "relative",
+          overflow: "auto",
+          width: "100vw",
+        }}
+      >
+        <HeroSection
+          title="Style Redefined"
+          subtitle="Discover the latest trends in fashion"
+          buttonText="Shop Now"
+          image="/images/hero-banner.jpg"
+        />
+        <Footer />
+      </div>
+      {/* 
       <CategorySection categories={categories} />
       <ProductSection title="New Arrivals" products={dummyProducts} />
       <PromoBanner
@@ -35,7 +50,7 @@ export default function Home() {
         buttonText="Shop Now"
       />
       <NewsletterSection />
-      <Footer /> */}
-    </>
+       */}
+    </div>
   );
 }
