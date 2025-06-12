@@ -10,9 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import {
   appBarStyle,
   toolbarStyle,
@@ -23,13 +21,18 @@ import {
   drawerBoxStyle,
   getButtonStyle,
 } from "../styles/Navbar.styles";
+import { DesktopDressesDropdown } from "./NavbarDropdowns";
+import { NavbarDrawerList } from "./NavbarDrawer";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [desktopDressesAnchorEl, setDesktopDressesAnchorEl] = useState(null);
+  const [mobileDressesAnchorEl, setMobileDressesAnchorEl] = useState(null);
   const location = useLocation();
+
   const navItems = [
     { label: "Home", path: "/" },
-    { label: "Dresses", path: "/Envision" },
+    { label: "Dresses", path: "/Envision", dropdown: true },
     { label: "Couples", path: "/Buddy" },
     { label: "Men's", path: "/Tribes" },
     { label: "Contact Us", path: "/signup" },
@@ -37,32 +40,28 @@ export function Navbar() {
     { label: "FAQ", path: "/faq" },
     { label: "Community", path: "/Community" },
   ];
+
+  const dressesDropdown = [
+    { label: "Wedding Dresses", path: "/dresses/wedding" },
+    { label: "Casual Dresses", path: "/dresses/casual" },
+    { label: "Traditional Dresses", path: "/dresses/traditional" },
+  ];
+
+  // Drawer and dropdown handlers
   const toggleDrawer = () => setOpen((prev) => !prev);
   const closeDrawer = () => setOpen(false);
-
-  const drawerList = (
-    <Box sx={drawerBoxStyle}>
-      <List>
-        {navItems.map((item) => (
-          <ListItem
-            button
-            key={item.label}
-            component={Link}
-            to={item.path}
-            onClick={closeDrawer}
-          >
-            <ListItemText primary={item.label} sx={{ color: "black" }} />
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+  const handleDesktopDressesOpen = (event) =>
+    setDesktopDressesAnchorEl(event.currentTarget);
+  const handleDesktopDressesClose = () => setDesktopDressesAnchorEl(null);
+  const handleMobileDressesOpen = (event) =>
+    setMobileDressesAnchorEl(event.currentTarget);
+  const handleMobileDressesClose = () => setMobileDressesAnchorEl(null);
 
   return (
     <>
       <AppBar position="static" sx={appBarStyle}>
         <Toolbar sx={toolbarStyle}>
-          {/* Drawer toggler (menu or close icon) */}
+          {/* Drawer toggler */}
           <IconButton
             color="inherit"
             edge="start"
@@ -76,27 +75,46 @@ export function Navbar() {
             )}
           </IconButton>
 
-          {/* Logo (center on mobile, left on desktop) */}
+          {/* Logo */}
           <Typography variant="h6" sx={titleStyle}>
             Hebasha cloth
           </Typography>
 
-          {/* Nav links (hidden on mobile, middle on desktop) */}
+          {/* Nav links (desktop) */}
           <Box sx={navBoxStyle}>
-            {navItems.map((item) => (
-              <Button
-                key={item.label}
-                color="inherit"
-                component={Link}
-                to={item.path}
-                sx={getButtonStyle(location.pathname === item.path)}
-              >
-                {item.label}
-              </Button>
-            ))}
+            {navItems.map((item) =>
+              item.dropdown ? (
+                <React.Fragment key={item.label}>
+                  <Button
+                    color="inherit"
+                    sx={getButtonStyle(location.pathname === item.path)}
+                    onClick={handleDesktopDressesOpen}
+                    endIcon={<KeyboardArrowDownIcon fontSize="small" />}
+                  >
+                    {item.label}
+                  </Button>
+                  <DesktopDressesDropdown
+                    anchorEl={desktopDressesAnchorEl}
+                    open={Boolean(desktopDressesAnchorEl)}
+                    onClose={handleDesktopDressesClose}
+                    dressesDropdown={dressesDropdown}
+                  />
+                </React.Fragment>
+              ) : (
+                <Button
+                  key={item.label}
+                  color="inherit"
+                  component={Link}
+                  to={item.path}
+                  sx={getButtonStyle(location.pathname === item.path)}
+                >
+                  {item.label}
+                </Button>
+              )
+            )}
           </Box>
 
-          {/* Search icon (right on both, but only visible on mobile and desktop as needed) */}
+          {/* Search icon */}
           <IconButton sx={searchIconStyle} size="large">
             <SearchIcon />
           </IconButton>
@@ -109,8 +127,8 @@ export function Navbar() {
         PaperProps={{
           sx: {
             width: "100vw",
-            top: "6.75rem", // Start below the AppBar
-            height: "calc(100vh - 6.75rem)", // Fill the rest of the screen
+            top: "6.75rem",
+            height: "calc(100vh - 6.75rem)",
             left: 0,
             position: "relative",
             backgroundColor: "#D9D9D9",
@@ -121,12 +139,20 @@ export function Navbar() {
           keepMounted: true,
           BackdropProps: {
             sx: {
-              backgroundColor: "transparent", // <--- This removes the dark overlay
+              backgroundColor: "transparent",
             },
           },
         }}
       >
-        <Box sx={drawerBoxStyle}>{drawerList}</Box>
+        <NavbarDrawerList
+          navItems={navItems}
+          dressesDropdown={dressesDropdown}
+          mobileDressesAnchorEl={mobileDressesAnchorEl}
+          handleMobileDressesOpen={handleMobileDressesOpen}
+          handleMobileDressesClose={handleMobileDressesClose}
+          closeDrawer={closeDrawer}
+          drawerBoxStyle={drawerBoxStyle}
+        />
       </Drawer>
     </>
   );
