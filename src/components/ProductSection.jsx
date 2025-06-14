@@ -1,20 +1,43 @@
 /** @jsxImportSource @emotion/react */
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import ProductCard from "./ProductCard";
 
 const ProductSection = ({ title, products }) => {
   return (
-    <Box my={5}>
-      <Typography variant="h4" gutterBottom>
+    <Box my={5} sx={{ width: "100%", mx: "auto" }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        align="center"
+        sx={{ mx: "auto", mb: 3, width: "100%" }}
+      >
         {title}
       </Typography>
-      <Grid container spacing={3}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2.5,
+          overflowX: "auto",
+          overflowY: "hidden",
+          scrollBehavior: "smooth",
+          py: 2,
+          px: 2,
+          // Remove px, use spacers for persistent gap
+          "&::-webkit-scrollbar": { display: "none" },
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
+        }}
+      >
+        {/* Left gap */}
+        <Box sx={{ flex: "0 0 auto", maxWidth: "2" }} />
         {products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product.id}>
+          <Box key={product.id} sx={{ flex: "0 0 auto" }}>
             <ProductCard product={product} />
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+        {/* Right gap */}
+        <Box sx={{ flex: "0 0 auto", maxWidth: "2" }} />
+      </Box>
     </Box>
   );
 };

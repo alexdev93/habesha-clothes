@@ -8,11 +8,17 @@ import Footer from "./components/Footer";
 import { Navbar } from "./components/Navbar";
 
 // Dummy products
-// const dummyProducts = [
-//   { id: 1, name: "T-shirt", price: "29.99", image: "/images/tshirt.jpg" },
-//   { id: 2, name: "Jeans", price: "49.99", image: "/images/jeans.jpg" },
-//   { id: 3, name: "Jacket", price: "89.99", image: "/images/jacket.jpg" },
-// ];
+const dummyProducts = [
+  { id: 1, name: "T-shirt", price: "29.99", image: "/shifon.webp" },
+  { id: 2, name: "Jeans", price: "49.99", image: "/shifon.webp" },
+  { id: 3, name: "Jacket", price: "89.99", image: "/shifon.webp" },
+  { id: 1, name: "T-shirt", price: "29.99", image: "/shifon.webp" },
+  { id: 2, name: "Jeans", price: "49.99", image: "/shifon.webp" },
+  { id: 3, name: "Jacket", price: "89.99", image: "/shifon.webp" },
+  { id: 1, name: "T-shirt", price: "29.99", image: "/shifon.webp" },
+  { id: 2, name: "Jeans", price: "49.99", image: "/shifon.webp" },
+  { id: 3, name: "Jacket", price: "89.99", image: "/shifon.webp" },
+];
 
 // Dummy categories
 // const categories = ["Men", "Women", "Accessories"];
@@ -39,18 +45,19 @@ export default function Home() {
           buttonText="Shop Now"
           image="/images/hero-banner.jpg"
         />
-        <Footer />
-      </div>
-      {/* 
-      <CategorySection categories={categories} />
-      <ProductSection title="New Arrivals" products={dummyProducts} />
-      <PromoBanner
+
+        <ProductSection title="New Arrivals" products={dummyProducts} />
+
+        {/* <CategorySection categories={categories} /> */}
+        {/* <PromoBanner
         discountCode="FIRST20"
         message="20% OFF on First Order"
         buttonText="Shop Now"
-      />
-      <NewsletterSection />
-       */}
+      /> */}
+        {/* <NewsletterSection /> */}
+
+        <Footer />
+      </div>
     </div>
   );
 }

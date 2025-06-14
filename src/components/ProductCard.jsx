@@ -5,10 +5,13 @@ import {
   Typography,
   Button,
   Box,
+  Chip,
 } from "@mui/material";
 import styled from "@emotion/styled";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const StyledCard = styled(Card)`
+  position: relative;
   transition: 0.3s;
   height: 100%;
   display: flex;
@@ -23,12 +26,41 @@ const StyledCard = styled(Card)`
 const ProductCard = ({ product }) => {
   return (
     <StyledCard>
-      <CardMedia
-        component="img"
-        height="250"
-        image={product.image}
-        alt={product.name}
-      />
+      {/* Media box with overlays */}
+      <Box sx={{ position: "relative" }}>
+        <CardMedia
+          component="img"
+          sx={{
+            width: "100%",
+            height: "16.25em",
+            objectFit: "cover",
+          }}
+          image={product.image}
+          alt={product.name}
+        />
+        {/* Heart icon at top right */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 8,
+            right: 8,
+            zIndex: 2,
+          }}
+        >
+          <FavoriteBorderIcon sx={{ color: "#e53935" }} />
+        </Box>
+        {/* Chip at bottom left */}
+        <Chip
+          label="Sale"
+          color="primary"
+          sx={{
+            position: "absolute",
+            left: 8,
+            bottom: 8,
+            zIndex: 2,
+          }}
+        />
+      </Box>
       <CardContent>
         <Typography variant="h6" gutterBottom>
           {product.name}
