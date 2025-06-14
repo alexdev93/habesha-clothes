@@ -4,7 +4,15 @@ import ProductCard from "./ProductCard";
 
 const ProductSection = ({ title, products }) => {
   return (
-    <Box my={5} sx={{ width: "100%", mx: "auto" }}>
+    <Box
+      my={5}
+      sx={{
+        width: "100%",
+        mx: "auto",
+        backgroundColor: "background.paper", // uses theme.palette.background.paper
+        color: "text.primary",
+      }}
+    >
       <Typography
         variant="h4"
         gutterBottom

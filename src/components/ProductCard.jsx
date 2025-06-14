@@ -11,6 +11,7 @@ import styled from "@emotion/styled";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const StyledCard = styled(Card)`
+  box-boxshadow: none !important;
   position: relative;
   transition: 0.3s;
   height: 100%;
@@ -25,7 +26,7 @@ const StyledCard = styled(Card)`
 
 const ProductCard = ({ product }) => {
   return (
-    <StyledCard>
+    <StyledCard elevation={0}>
       {/* Media box with overlays */}
       <Box sx={{ position: "relative" }}>
         <CardMedia
@@ -61,14 +62,29 @@ const ProductCard = ({ product }) => {
           }}
         />
       </Box>
-      <CardContent>
-        <Typography variant="h6" gutterBottom>
+      <CardContent
+        sx={{
+          backgroundColor: "background.paper", // uses theme.palette.background.paper
+          color: "text.primary", // uses theme.palette.text.primary
+        }}
+      >
+        <Typography variant="h6" color="text.primary" gutterBottom>
           {product.name}
         </Typography>
         <Typography variant="body2" color="text.secondary" gutterBottom>
           ${product.price}
         </Typography>
-        <Box mt={2}>
+        <Box
+          mt={2}
+          sx={{
+            position: "absolute",
+            left: 0,
+            bottom: 0,
+            width: "60%",
+            px: 2,
+            pb: 2,
+          }}
+        >
           <Button variant="contained" fullWidth>
             Add to Cart
           </Button>
